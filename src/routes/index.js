@@ -6,7 +6,7 @@
  */
 const express = require('express');
 const router = express.Router();
-router.get('/api', (req, res) => {
+router.get('/home', (req, res) => {
   res.status(200).send({
     success: 'true',
     message: 'Seja bem-vindo(a) a API Rede Social Livros usando  Node.js + PostgreSQL + Azure!',

@@ -34,11 +34,8 @@ exports.deleteAutor = async (req, res) => {
   const autorId = req.params.id; 
   const response  = await db.query('DELETE FROM autores WHERE id = $1', [autorId]);
   res.status(200).send({ 
-    message: 'Autor deletado com sucesso!',
-    autorId ,
-    body:{
-      autor:{nome}
-  }})
+    message: 'Autor deletado com sucesso!'
+  })
 }
 
 exports.updateAutor = async (req, res) => {
