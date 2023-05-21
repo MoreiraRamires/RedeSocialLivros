@@ -23,7 +23,7 @@ exports.listAllAutores = async (req, res) => {
 // ==> Método responsável por selecionar 'Product' pelo 'Id':
 exports.findAutorById = async (req, res) => {
 
-  const autorId = req.params.id; 
+  const autorId = req.query.id; 
   const response  = await db.query('SELECT * FROM autores WHERE id = $1', [autorId]);
   res.status(200).send(response .rows);
 }
@@ -31,7 +31,7 @@ exports.findAutorById = async (req, res) => {
 
 // ==> Método responsável por selecionar 'Product' pelo 'Id':
 exports.deleteAutor = async (req, res) => {
-  const autorId = req.params.id; 
+  const autorId = req.query.id; 
   const response  = await db.query('DELETE FROM autores WHERE id = $1', [autorId]);
   res.status(200).send({ 
     message: 'Autor deletado com sucesso!'
@@ -39,7 +39,7 @@ exports.deleteAutor = async (req, res) => {
 }
 
 exports.updateAutor = async (req, res) => {
-  const autorId = req.params.id; 
+  const autorId = req.query.id; 
   const {nome} = req.body;
   const response  = await db.query('UPDATE autores set Nome = $1 WHERE id = $2',[nome,autorId]);
   res.status(200).send({ 

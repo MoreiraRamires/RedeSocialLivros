@@ -10,9 +10,14 @@ const editoraController = require('../controllers/editora.controller');
 
 router.post('/editoras',editoraController.createEditora);
 router.get('/editoras',editoraController.findAllEditoras);
-router.get('/editoras/:id',editoraController.findEditoraById);
+router.get('/editora',editoraController.findEditoraById);
 router.put('/editoras/:id',editoraController.updateEditora);
 router.delete('/editoras/:id',editoraController.deleteEditora);
+
+//path variavel
+// request argument ?
+
+
 
 
 module.exports = router;

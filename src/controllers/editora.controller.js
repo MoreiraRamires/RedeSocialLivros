@@ -22,6 +22,8 @@ exports.createEditora = async (req, res) => {
 }
 
 exports.findAllEditoras = async (req, res) => {
+    console.log("Find All",JSON.stringify(req.query))
+
     try {
 
 
@@ -49,7 +51,9 @@ exports.findAllEditoras = async (req, res) => {
 }
 
 exports.findEditoraById = async (req, res) => {
-    const editoraId = req.params.id;
+    console.log("Find By ID: ",JSON.stringify(req.query))
+
+    const editoraId = req.query.id;
 
     if (!isUUID(editoraId)) {
         return res.status(400).send({
@@ -80,7 +84,7 @@ exports.findEditoraById = async (req, res) => {
 }
 
 exports.updateEditora = async (req, res) => {
-    const editoraId = req.params.id
+    const editoraId = req.query.id
     if (!isUUID(editoraId)) {
         return res.status(400).send({ message: 'Esse não é um ID válido' })
     }
@@ -110,7 +114,7 @@ exports.updateEditora = async (req, res) => {
 }
 
 exports.deleteEditora = async (req, res) => {
-    const editoraId = req.params.id;
+    const editoraId = req.query.id;
 
     if (!isUUID(editoraId)) {
         return res.status(400).send({ message: 'Esse não é um UUID válido' })
