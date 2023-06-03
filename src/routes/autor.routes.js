@@ -14,7 +14,7 @@ router.post('/autores', autorController.createAutor);
 router.get('/autores', autorController.listAllAutores);
 
 // ==> Rota responsável por selecionar 'Product' pelo 'Id': (GET): localhost:3000/api/products/:id
-router.get('/autores/:id', autorController.findAutorById);
+router.get('/autor/:id', autorController.findAutorById);
 
 router.put('/autores/:id', autorController.updateAutor);
 router.delete('/autores/:id',autorController.deleteAutor);

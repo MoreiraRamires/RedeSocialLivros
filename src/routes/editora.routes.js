@@ -4,15 +4,15 @@
  */
 
 const router = require('express-promise-router')();
-const editoraController = require('../controllers/editora.controller');
+const editoraController = require('../api/controllers/editora.controller');
 
 //CRUD
 
 router.post('/editoras',editoraController.createEditora);
 router.get('/editoras',editoraController.findAllEditoras);
-router.get('/editora',editoraController.findEditoraById);
-router.put('/editoras/:id',editoraController.updateEditora);
-router.delete('/editoras/:id',editoraController.deleteEditora);
+router.get('/editora/:id',editoraController.findEditoraById);
+router.put('/editora/:id',editoraController.updateEditora);
+router.delete('/editora/:id',editoraController.deleteEditora);
 
 //path variavel
 // request argument ?

@@ -1,10 +1,7 @@
-const db = require("../config/database");
+const db = require("../../config/database");
 const isUUID = require('uuid-validate');
 
-// function isValidEditoraId(id) {
-//   // Verificar se o ID é um UUID válido
-//   return isUUID(id);
-// }
+
 
 exports.createEditora = async (req, res) => {
     const { nome } = req.body;
@@ -22,7 +19,7 @@ exports.createEditora = async (req, res) => {
 }
 
 exports.findAllEditoras = async (req, res) => {
-    console.log("Find All",JSON.stringify(req.query))
+    // console.log("Find All",JSON.stringify(req.query.id))
 
     try {
 
@@ -51,9 +48,7 @@ exports.findAllEditoras = async (req, res) => {
 }
 
 exports.findEditoraById = async (req, res) => {
-    console.log("Find By ID: ",JSON.stringify(req.query))
-
-    const editoraId = req.query.id;
+    const {editoraId} =req.params.id
 
     if (!isUUID(editoraId)) {
         return res.status(400).send({
@@ -65,6 +60,7 @@ exports.findEditoraById = async (req, res) => {
     try {
         const response = await db.query('SELECT * FROM EDITORAS WHERE ID = $1', [editoraId])
 
+        console.log("Editora ID", editoraId)
         if (response.rows.length === 0) {
             return res.send(200).send({
                 message: 'Não há editora correspondente ao código fornecido'
@@ -84,12 +80,14 @@ exports.findEditoraById = async (req, res) => {
 }
 
 exports.updateEditora = async (req, res) => {
-    const editoraId = req.query.id
-    if (!isUUID(editoraId)) {
-        return res.status(400).send({ message: 'Esse não é um ID válido' })
-    }
+    console.log("Find By ID: ",JSON.stringify(req.params.id))
+    const editoraId =req.params.id
 
-    try {
+    // if (!isUUID(editoraId)) {
+    //     return res.status(400).send({ message: 'Esse não é um ID válido' })
+    // }
+
+    // try {
         const { nome } = req.body;
         const response = await db.query(
             'UPDATE EDITORAS SET NOME = $1 WHERE ID=$2', [nome, editoraId]
@@ -104,25 +102,27 @@ exports.updateEditora = async (req, res) => {
                 }
             }
         })
-    } catch (error) {
-        console.log('Erro ao buscar a Editora', error)
-        return res.status(500).send({
-            message: 'Erro ao buscar a Editora',
-            error: error
-        })
-    }
+    // } catch (error) {
+    //     console.log('Erro ao buscar a Editora', error)
+    //     return res.status(500).send({
+    //         message: 'Erro ao buscar a Editora',
+    //         error: error
+    //     })
+    // }
 }
 
 exports.deleteEditora = async (req, res) => {
-    const editoraId = req.query.id;
+    // const editoraId = req.query.id;
+    console.log("Find All",JSON.stringify(req.params.id))
+    const editoraId =req.params.id
 
-    if (!isUUID(editoraId)) {
-        return res.status(400).send({ message: 'Esse não é um UUID válido' })
-    }
+    // if (!isUUID(editoraId)) {
+    //     return res.status(400).send({ message: 'Esse não é um UUID válido' })
+    // }
 
 
 
-    try {
+    // try {
         const response = await db.query(
             'DELETE FROM editoras WHERE id = $1', [editoraId]
         )
@@ -131,8 +131,8 @@ exports.deleteEditora = async (req, res) => {
         })
        
 
-    } catch (error) {
-        return res.status(500).send({ message: 'Erro ao consultar Editora', error })
-    }
+    // } catch (error) {
+    //     return res.status(500).send({ message: 'Erro ao consultar Editora', error })
+    // }
 
 }
